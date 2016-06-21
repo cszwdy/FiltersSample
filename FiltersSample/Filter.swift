@@ -102,20 +102,29 @@ extension Filter {
         let bytesPerPixel = 4 // pixel = GRBA = 4xcompoent = 4 bytes
         let bitsPerComponent = 8 //  component = R/G/B/A = 1 byte = 8 bit
         let bytesPerRow = bytesPerPixel * w
-        let size = w * h * bytesPerPixel
-        var bitmap = malloc(size)
+        let size = bytesPerRow * h
+        let bitmapBuffer = NSMutableData(bytes: malloc(size), length: size)
+        let bitmap = bitmapBuffer.mutableBytes
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo =  CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue).rawValue
         
-        guard let context = CGBitmapContextCreate(&bitmap, w, h, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo) else { free(bitmap); return nil }
+        guard let context = CGBitmapContextCreate(bitmap, w, h, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo) else { return nil }
         
         CGContextDrawImage(context, CGRect(x: 0, y: 0, width: w, height: h), img)
-        let finishedBitmap = bitmap
+        // http://stackoverflow.com/questions/24049313/how-do-i-load-and-edit-a-bitmap-file-at-the-pixel-level-in-swift-for-ios
+        let data:COpaquePointer = COpaquePointer(CGBitmapContextGetData(context))
+        let dataType = UnsafePointer<UInt8>(data)
+//        print(dataType[61])
         
         // create RGBA data from bitmap
-        let dsize = d * d * d * sizeof(CGFloat) * 4
-        var data = NSMutableData(capacity: dsize)
+//        print(sizeof(CGFloat))
+        let dsize = d * d * d * 4 * sizeof(Float32)
+        let ddata = NSMutableData(bytes: malloc(dsize), length: dsize)
+        
+        let ndata:COpaquePointer = COpaquePointer(ddata.mutableBytes)
+        let ndataType = UnsafeMutablePointer<Float32>(ndata)
+        
         var bitmapOffset = 0
         var z = 0
         for _ in 0..<row {
@@ -123,22 +132,25 @@ extension Filter {
                let tmpZ = z
                 for _ in 0..<col {
                     for x in 0..<d {
-                        let r = unsafeBitCast(bitmap[bitmapOffset + 0], Int.self)
-                        let g = unsafeBitCast(bitmap[bitmapOffset + 1], Int.self)
-                        let b = unsafeBitCast(bitmap[bitmapOffset + 2], Int.self)
-                        let a = unsafeBitCast(bitmap[bitmapOffset + 3], Int.self)
+                        let a = dataType[bitmapOffset + 0]
+                        let r = dataType[bitmapOffset + 1]
+                        let g = dataType[bitmapOffset + 2]
+                        let b = dataType[bitmapOffset + 3]
+                        
+//                        print("\(r),\(g),\(b),\(a)")
                         
                         let dataOffset = (z*d*d + y*d + x) * 4
                         
-                        var r1 = CGFloat(r) / 255.0
-                        var g1 = CGFloat(g) / 255.0
-                        var b1 = CGFloat(b) / 255.0
-                        var a1 = CGFloat(a) / 255.0
+                        let a1 = Float32(a) / 255.0
+                        let r1 = Float32(r) / 255.0
+                        let g1 = Float32(g) / 255.0
+                        let b1 = Float32(b) / 255.0
                         
-                        data?.replaceBytesInRange(NSMakeRange(dataOffset + 0, 1), withBytes: &r1)
-                        data?.replaceBytesInRange(NSMakeRange(dataOffset + 1, 1), withBytes: &g1)
-                        data?.replaceBytesInRange(NSMakeRange(dataOffset + 2, 1), withBytes: &b1)
-                        data?.replaceBytesInRange(NSMakeRange(dataOffset + 3, 1), withBytes: &a1)
+                        
+                        ndataType[dataOffset] = Float32(r1)
+                        ndataType[dataOffset + 1] = Float32(g1)
+                        ndataType[dataOffset + 2] = Float32(b1)
+                        ndataType[dataOffset + 3] = Float32(a1)
                         
                         bitmapOffset += 4
                     }
@@ -149,10 +161,6 @@ extension Filter {
             z += col
         }
         
-        free(bitmap)
-        
-        guard let finalData = data else { return nil }
-        
-        return data
+        return ddata
     }
 }
