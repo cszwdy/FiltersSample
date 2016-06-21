@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C169C371D1939B80028BE18 /* zn.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 2C169C361D1939B80028BE18 /* zn.JPG */; };
+		2C169C391D1939FD0028BE18 /* zn_512x512.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 2C169C381D1939FD0028BE18 /* zn_512x512.JPG */; };
 		2C63723E1D18D5A10060D86D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63723D1D18D5A10060D86D /* AppDelegate.swift */; };
 		2C6372401D18D5A10060D86D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63723F1D18D5A10060D86D /* ViewController.swift */; };
 		2C6372431D18D5A10060D86D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C6372411D18D5A10060D86D /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C169C361D1939B80028BE18 /* zn.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zn.JPG; sourceTree = "<group>"; };
+		2C169C381D1939FD0028BE18 /* zn_512x512.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zn_512x512.JPG; sourceTree = "<group>"; };
 		2C63723A1D18D5A10060D86D /* FiltersSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FiltersSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C63723D1D18D5A10060D86D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C63723F1D18D5A10060D86D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				2C63726D1D18F6360060D86D /* m.jpeg */,
+				2C169C381D1939FD0028BE18 /* zn_512x512.JPG */,
+				2C169C361D1939B80028BE18 /* zn.JPG */,
 				2C63723D1D18D5A10060D86D /* AppDelegate.swift */,
 				2C63723F1D18D5A10060D86D /* ViewController.swift */,
 				2C63726B1D18D6BA0060D86D /* Filter.swift */,
@@ -235,9 +241,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C169C371D1939B80028BE18 /* zn.JPG in Resources */,
 				2C6372481D18D5A10060D86D /* LaunchScreen.storyboard in Resources */,
 				2C6372451D18D5A10060D86D /* Assets.xcassets in Resources */,
 				2C6372431D18D5A10060D86D /* Main.storyboard in Resources */,
+				2C169C391D1939FD0028BE18 /* zn_512x512.JPG in Resources */,
 				2C63726E1D18F6360060D86D /* m.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
