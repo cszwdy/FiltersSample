@@ -53,7 +53,7 @@ class PhotoViewController: UIViewController {
         if let indexPath = collectionView.indexPathsForSelectedItems()?.first {
             if authorized, let result = fetchResult, let item = indexPath.item {
                 let asset = result[item]
-                let size = CGSize(width: asset.pixelWidth, height: asset.pixelHeight).fitTo(size: targetSize)
+                let size = CGSize(width: asset.pixelWidth, height: asset.pixelHeight).fitTo(size: targetSize).multi(v: UIScreen.main().scale)
                 let options = PHImageRequestOptions()
                 options.isSynchronous = true
                 manager.requestImage(for: asset, targetSize: size, contentMode: PHImageContentMode.aspectFit, options: options, resultHandler: {[weak self] (image, info) in

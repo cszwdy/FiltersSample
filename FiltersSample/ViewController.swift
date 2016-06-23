@@ -131,8 +131,9 @@ class ViewController: UIViewController {
             let size = sf.imageView.bounds.size.multi(v: UIScreen.main().scale)
             photoVC.targetSize = size
             photoVC.doneHandler = { photo in
-                UIGraphicsBeginImageContext(size)
-                photo.draw(in: CGRect(origin: CGPoint.zero, size: size))
+                let drawSize = photo.size.fitTo(size: size)
+                UIGraphicsBeginImageContext(drawSize)
+                photo.draw(in: CGRect(origin: CGPoint.zero, size: drawSize))
                 let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
                 sf.imageView.image = scaledImage

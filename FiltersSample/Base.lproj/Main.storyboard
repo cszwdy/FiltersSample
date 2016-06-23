@@ -91,7 +91,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="03z-la-YRj">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="03z-la-YRj">
                                                     <frame key="frameInset" minX="1" minY="1" maxX="1" maxY="1"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="0.12549019610000001" green="0.47058823529999999" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
