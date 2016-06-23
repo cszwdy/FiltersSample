@@ -16,16 +16,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FiltersSample/PhotoViewController.swift"
+            timestampString = "488381357.648747"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "done(sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FiltersSample/FiltersViewController.swift"
-            timestampString = "488376993.747964"
+            filePath = "FiltersSample/ViewController.swift"
+            timestampString = "488385774.165392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "collectionView(_:didSelectItemAt:)"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "saveFilters(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

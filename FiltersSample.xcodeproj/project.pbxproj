@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C04FA521D1C0D0400F30734 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04FA511D1C0D0400F30734 /* PhotoViewController.swift */; };
 		2C169C371D1939B80028BE18 /* zn.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 2C169C361D1939B80028BE18 /* zn.JPG */; };
 		2C169C391D1939FD0028BE18 /* zn_512x512.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 2C169C381D1939FD0028BE18 /* zn_512x512.JPG */; };
 		2C2A21521D198DBC0003FFC4 /* 1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2C2A21511D198DBC0003FFC4 /* 1.jpeg */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C04FA511D1C0D0400F30734 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		2C169C361D1939B80028BE18 /* zn.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zn.JPG; sourceTree = "<group>"; };
 		2C169C381D1939FD0028BE18 /* zn_512x512.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zn_512x512.JPG; sourceTree = "<group>"; };
 		2C2A21511D198DBC0003FFC4 /* 1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpeg; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				2C63723D1D18D5A10060D86D /* AppDelegate.swift */,
 				2C63723F1D18D5A10060D86D /* ViewController.swift */,
 				2CE2BB541D1BBD19009E4999 /* FiltersViewController.swift */,
+				2C04FA511D1C0D0400F30734 /* PhotoViewController.swift */,
 				2C6372411D18D5A10060D86D /* Main.storyboard */,
 				2C6372441D18D5A10060D86D /* Assets.xcassets */,
 				2C6372461D18D5A10060D86D /* LaunchScreen.storyboard */,
@@ -217,8 +220,8 @@
 				TargetAttributes = {
 					2C6372391D18D5A10060D86D = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = P36PRJCB4C;
-						DevelopmentTeamName = "YONGQUAN ZHANG (Personal Team)";
+						DevelopmentTeam = H7HX4A2DL8;
+						DevelopmentTeamName = "Beijing Curios Technology Co., Ltd.";
 						LastSwiftMigration = 0800;
 					};
 					2C63724D1D18D5A10060D86D = {
@@ -295,6 +298,7 @@
 				2CE2BB551D1BBD19009E4999 /* FiltersViewController.swift in Sources */,
 				2C63723E1D18D5A10060D86D /* AppDelegate.swift in Sources */,
 				2CE2BB571D1BC0EF009E4999 /* FIlterItem.swift in Sources */,
+				2C04FA521D1C0D0400F30734 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

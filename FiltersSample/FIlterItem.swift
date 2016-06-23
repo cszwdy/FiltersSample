@@ -11,7 +11,7 @@ import UIKit
 
 private let queue = DispatchQueue(label: "Filter.Item.Queue")
 
-class FilterItem {
+class FilterItem: NSObject, NSCoding {
     let name: String
     let data: NSData
     private(set) var assetIdentifier: String
@@ -21,6 +21,18 @@ class FilterItem {
         self.name = name
         self.data = data
         self.assetIdentifier = NSUUID().uuidString.characters.split(separator: "-").map{String($0)}.reduce("", combine:{$0+$1})
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.name = aDecoder.decodeObject(forKey: "name") as! String
+        self.data = aDecoder.decodeObject(forKey: "data") as! NSData
+        self.assetIdentifier = aDecoder.decodeObject(forKey: "ID") as! String
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: "name")
+        aCoder.encode(data, forKey: "data")
+        aCoder.encode(assetIdentifier, forKey: "ID")
     }
     
     func cleanImage() {

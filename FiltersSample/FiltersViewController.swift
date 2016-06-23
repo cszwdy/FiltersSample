@@ -38,9 +38,9 @@ class FiltersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let data = Filter.colorLUTData(byImage: (UIImage(named: "k2.jpeg")?.cgImage!)!, dimensiton: 64)!
-        let item = FilterItem(name: "K2", data: data)
-        filters = [item]
+//        let data = Filter.colorLUTData(byImage: (UIImage(named: "k2.jpeg")?.cgImage!)!, dimensiton: 64)!
+//        let item = FilterItem(name: "K2", data: data)
+//        filters = [item]
     }
     
     /*
@@ -151,7 +151,7 @@ extension FiltersViewController: UICollectionViewDelegate {
                 })
             })
         }
-        
+
     }
     
 }
