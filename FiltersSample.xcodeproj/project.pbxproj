@@ -20,6 +20,8 @@
 		2C63725E1D18D5A20060D86D /* FiltersSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63725D1D18D5A20060D86D /* FiltersSampleUITests.swift */; };
 		2C63726C1D18D6BA0060D86D /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63726B1D18D6BA0060D86D /* Filter.swift */; };
 		2C63726E1D18F6360060D86D /* m.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2C63726D1D18F6360060D86D /* m.jpeg */; };
+		2CE2BB551D1BBD19009E4999 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE2BB541D1BBD19009E4999 /* FiltersViewController.swift */; };
+		2CE2BB571D1BC0EF009E4999 /* FIlterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE2BB561D1BC0EF009E4999 /* FIlterItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		2C63725F1D18D5A20060D86D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C63726B1D18D6BA0060D86D /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		2C63726D1D18F6360060D86D /* m.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = m.jpeg; sourceTree = "<group>"; };
+		2CE2BB541D1BBD19009E4999 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		2CE2BB561D1BC0EF009E4999 /* FIlterItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIlterItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,9 +118,11 @@
 				2C2A21531D198F920003FFC4 /* k2.jpeg */,
 				2C169C381D1939FD0028BE18 /* zn_512x512.JPG */,
 				2C169C361D1939B80028BE18 /* zn.JPG */,
+				2C63726B1D18D6BA0060D86D /* Filter.swift */,
+				2CE2BB561D1BC0EF009E4999 /* FIlterItem.swift */,
 				2C63723D1D18D5A10060D86D /* AppDelegate.swift */,
 				2C63723F1D18D5A10060D86D /* ViewController.swift */,
-				2C63726B1D18D6BA0060D86D /* Filter.swift */,
+				2CE2BB541D1BBD19009E4999 /* FiltersViewController.swift */,
 				2C6372411D18D5A10060D86D /* Main.storyboard */,
 				2C6372441D18D5A10060D86D /* Assets.xcassets */,
 				2C6372461D18D5A10060D86D /* LaunchScreen.storyboard */,
@@ -206,18 +212,23 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Emiaostein;
 				TargetAttributes = {
 					2C6372391D18D5A10060D86D = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = P36PRJCB4C;
+						DevelopmentTeamName = "YONGQUAN ZHANG (Personal Team)";
+						LastSwiftMigration = 0800;
 					};
 					2C63724D1D18D5A10060D86D = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 2C6372391D18D5A10060D86D;
 					};
 					2C6372581D18D5A10060D86D = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 2C6372391D18D5A10060D86D;
 					};
 				};
@@ -281,7 +292,9 @@
 			files = (
 				2C6372401D18D5A10060D86D /* ViewController.swift in Sources */,
 				2C63726C1D18D6BA0060D86D /* Filter.swift in Sources */,
+				2CE2BB551D1BBD19009E4999 /* FiltersViewController.swift in Sources */,
 				2C63723E1D18D5A10060D86D /* AppDelegate.swift in Sources */,
+				2CE2BB571D1BC0EF009E4999 /* FIlterItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,10 +436,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = FiltersSample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.botai.FiltersSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.botai.FiltersSample2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -434,10 +450,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				INFOPLIST_FILE = FiltersSample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.botai.FiltersSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.botai.FiltersSample2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -449,6 +469,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.botai.FiltersSampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FiltersSample.app/FiltersSample";
 			};
 			name = Debug;
@@ -461,6 +482,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.botai.FiltersSampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FiltersSample.app/FiltersSample";
 			};
 			name = Release;
@@ -472,6 +495,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.botai.FiltersSampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = FiltersSample;
 			};
 			name = Debug;
@@ -483,6 +507,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.botai.FiltersSampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = FiltersSample;
 			};
 			name = Release;

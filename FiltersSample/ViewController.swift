@@ -10,28 +10,83 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let queue = dispatch_queue_create("Emiaostein", DISPATCH_QUEUE_CONCURRENT)
+    let queue = DispatchQueue(label: "Emiaostein", attributes: DispatchQueueAttributes.concurrent)
     
+    @IBOutlet weak var imageView: UIImageView!
+    var image: UIImage?
+    var filteredImage: UIImage?{ didSet {imageView.image = filteredImage ?? image}}
+    lazy var filterController: FiltersViewController = self.childViewControllers.first! as! FiltersViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let img = CIImage(image: UIImage(named: "1.jpeg")!)!
-        let colorLUTImage = UIImage(named: "k2.jpeg")!
-        let data = Filter.colorLUTData(byImage: colorLUTImage.CGImage!, dimensiton: 64)!
-        dispatch_async(queue) {
-            let img2 = Filter()
-                .colorLUT(colorTableData: data, dimension: 64)
-                .start(byImage: img)
-            
-            let cgimg = Filter.context.createCGImage(img2, fromRect: img2.extent)
-            
-            dispatch_async(dispatch_get_main_queue(), { 
-                let image = UIImage(CGImage: cgimg)
-                if let imgview = self.view.viewWithTag(1000) as? UIImageView {
-                    imgview.image = image
+        title = "Filters"
+        filterController.didSelectedHandler = { image in
+            DispatchQueue.main.async(execute: { [weak self] in
+                guard let sf = self else {
+                    return
                 }
+
+                sf.filteredImage = image
             })
         }
+        
+        filterController.addHandler = {[weak self] in
+            guard let sf = self else {
+                return
+            }
+            DispatchQueue.main.async(execute: { 
+                sf.add()
+            })
+        }
+    }
+    
+    var firstadd = true
+    func add() {
+        if firstadd {
+//            firstadd = false
+            let data = Filter.colorLUTData(byImage: (UIImage(named: "zn_512x512.JPG")?.cgImage!)!, dimensiton: 64)!
+            let item = FilterItem(name: "zn", data: data)
+            filterController.add(filterItem: item)
+        }
+    }
+    
+    var first = true
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        if first {
+            first = false
+            let img = UIImage(named: "1.jpeg")!
+            let itemSize = imageView.bounds.size.multi(v: UIScreen.main().scale)
+            let fillSize = img.size.fillTo(size: itemSize)
+            UIGraphicsBeginImageContext(fillSize)
+            img.draw(in: CGRect(origin: CGPoint.zero, size: fillSize))
+            let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            image = scaledImage
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+
+        imageView.image = image
+        filterController.image = image
+    }
+    
+    @IBAction func pan(_ sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .changed, .began:
+            ()
+        default:
+            imageView.image = filteredImage ?? image
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        imageView.image = image
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        imageView.image = filteredImage ?? image
     }
 }
 

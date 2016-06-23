@@ -9,7 +9,7 @@
 import Foundation
 import CoreImage
 
-private typealias FilterProcess = CIImage -> CIImage
+private typealias FilterProcess = (CIImage) -> CIImage
 
 infix operator --> {associativity left}
 private func --> (filter1: FilterProcess, filter2: FilterProcess) -> FilterProcess {
@@ -19,12 +19,12 @@ private func --> (filter1: FilterProcess, filter2: FilterProcess) -> FilterProce
 class Filter {
     
     static let context = CIContext(options: [
-        kCIContextWorkingColorSpace: CGColorSpaceCreateDeviceRGB()!
+        kCIContextWorkingColorSpace: CGColorSpaceCreateDeviceRGB()
         ])
     
     private var filter: FilterProcess = {$0}
     
-    func blur(r: Double) -> Filter {
+    func blur(_ r: Double) -> Filter {
         filter = filter --> {img in
             let parameters = [
                 kCIInputRadiusKey: r,
@@ -38,7 +38,7 @@ class Filter {
         return self
     }
     
-    func colorOverlay(r r: Double, g: Double, b: Double, a: Double) -> Filter {
+    func colorOverlay(r: Double, g: Double, b: Double, a: Double) -> Filter {
         filter = filter --> { img in
             let overlay = Filter.colorGenerator(r, g, b, a)(img)
             return Filter.compositeSourceOver(overlay)(img)
@@ -47,7 +47,7 @@ class Filter {
         return self
     }
     
-    func colorLUT(colorTableData data: NSData, dimension: Int) -> Filter {
+    func colorLUT(colorTableData data: Data, dimension: Int) -> Filter {
         filter = filter --> { img in
             let parameters = [
                 kCIInputImageKey: img,
@@ -67,7 +67,7 @@ class Filter {
 }
 
 extension Filter {
-    private class func colorGenerator(r: Double, _ g: Double, _ b: Double, _ a: Double) -> FilterProcess {
+    private class func colorGenerator(_ r: Double, _ g: Double, _ b: Double, _ a: Double) -> FilterProcess {
         return {_ in
             let c = CIColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(a))
             let parameters = [kCIInputColorKey: c]
@@ -78,7 +78,7 @@ extension Filter {
         }
     }
     
-    private class func compositeSourceOver(overlay: CIImage) -> FilterProcess {
+    private class func compositeSourceOver(_ overlay: CIImage) -> FilterProcess {
         return { img in
             let parameters = [
                 kCIInputBackgroundImageKey: img,
@@ -87,16 +87,16 @@ extension Filter {
             guard let f = CIFilter (name: "CISourceOverCompositing", withInputParameters: parameters), outputImage = f.outputImage else { fatalError() }
             let cropRect = img.extent
             
-            return outputImage.imageByCroppingToRect(cropRect)
+            return outputImage.cropping(to: cropRect)
         }
     }
 }
 
 extension Filter {
     
-    class func colorLUTData(byImage img: CGImage, dimensiton d: Int) -> NSData? {
-        let w = Int(CGImageGetWidth(img))
-        let h = Int(CGImageGetHeight(img))
+    class func colorLUTData(byImage img: CGImage, dimensiton d: Int) -> Data? {
+        let w = Int(img.width)
+        let h = Int(img.height)
         let row = w / d
         let col = h / d
         
@@ -111,20 +111,20 @@ extension Filter {
         let bitmap = bitmapBuffer.mutableBytes
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let bitmapInfo =  CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue).rawValue
+        let bitmapInfo =  CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue).rawValue
         
-        guard let context = CGBitmapContextCreate(bitmap, w, h, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo) else { return nil }
+        guard let context = CGContext(data: bitmap, width: w, height: h, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo) else { return nil }
         
-        CGContextDrawImage(context, CGRect(x: 0, y: 0, width: w, height: h), img)
+        context.draw(in: CGRect(x: 0, y: 0, width: w, height: h), image: img)
         // http://stackoverflow.com/questions/24049313/how-do-i-load-and-edit-a-bitmap-file-at-the-pixel-level-in-swift-for-ios
-        let data:COpaquePointer = COpaquePointer(CGBitmapContextGetData(context))
+        let data:OpaquePointer = OpaquePointer(context.data!)
         let dataType = UnsafePointer<UInt8>(data)
         
         // create RGBA data from bitmap
         let dsize = d * d * d * 4 * sizeof(Float32)
         let ddata = NSMutableData(bytes: malloc(dsize), length: dsize)
         
-        let ndata:COpaquePointer = COpaquePointer(ddata.mutableBytes)
+        let ndata:OpaquePointer = OpaquePointer(ddata.mutableBytes)
         let ndataType = UnsafeMutablePointer<Float32>(ndata)
         
         var bitmapOffset = 0
@@ -160,6 +160,17 @@ extension Filter {
             z += col
         }
         
-        return ddata
+        return ddata as Data
     }
 }
+
+// MARK: ---------- CIImage Extension --------–-
+extension CIImage {
+    func tocgImage() -> CGImage {
+        guard let img = Filter.context.createCGImage(self, from: self.extent) else {
+            fatalError("Can't create cgImage from ciImage")
+        }
+        return img
+    }
+}
+
