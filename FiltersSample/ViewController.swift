@@ -20,15 +20,10 @@ class ViewController: UIViewController {
         let data = Filter.colorLUTData(byImage: colorLUTImage.CGImage!, dimensiton: 64)!
         dispatch_async(queue) {
             let img2 = Filter()
-//                .colorOverlay(r: 0.5, g: 0.5, b: 0.5, a: 0.5)
-//                .blur(5)
                 .colorLUT(colorTableData: data, dimension: 64)
                 .start(byImage: img)
             
-            let context = CIContext(options: [
-                kCIContextWorkingColorSpace: CGColorSpaceCreateDeviceRGB()!
-                ])
-            let cgimg = context.createCGImage(img2, fromRect: img2.extent)
+            let cgimg = Filter.context.createCGImage(img2, fromRect: img2.extent)
             
             dispatch_async(dispatch_get_main_queue(), { 
                 let image = UIImage(CGImage: cgimg)

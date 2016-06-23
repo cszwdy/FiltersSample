@@ -18,6 +18,10 @@ private func --> (filter1: FilterProcess, filter2: FilterProcess) -> FilterProce
 
 class Filter {
     
+    static let context = CIContext(options: [
+        kCIContextWorkingColorSpace: CGColorSpaceCreateDeviceRGB()!
+        ])
+    
     private var filter: FilterProcess = {$0}
     
     func blur(r: Double) -> Filter {
@@ -115,10 +119,8 @@ extension Filter {
         // http://stackoverflow.com/questions/24049313/how-do-i-load-and-edit-a-bitmap-file-at-the-pixel-level-in-swift-for-ios
         let data:COpaquePointer = COpaquePointer(CGBitmapContextGetData(context))
         let dataType = UnsafePointer<UInt8>(data)
-//        print(dataType[61])
         
         // create RGBA data from bitmap
-//        print(sizeof(CGFloat))
         let dsize = d * d * d * 4 * sizeof(Float32)
         let ddata = NSMutableData(bytes: malloc(dsize), length: dsize)
         
@@ -137,8 +139,6 @@ extension Filter {
                         let g = dataType[bitmapOffset + 2]
                         let b = dataType[bitmapOffset + 3]
                         
-//                        print("\(r),\(g),\(b),\(a)")
-                        
                         let dataOffset = (z*d*d + y*d + x) * 4
                         
                         let a1 = Float32(a) / 255.0
@@ -146,8 +146,7 @@ extension Filter {
                         let g1 = Float32(g) / 255.0
                         let b1 = Float32(b) / 255.0
                         
-                        
-                        ndataType[dataOffset] = Float32(r1)
+                        ndataType[dataOffset + 0] = Float32(r1)
                         ndataType[dataOffset + 1] = Float32(g1)
                         ndataType[dataOffset + 2] = Float32(b1)
                         ndataType[dataOffset + 3] = Float32(a1)
