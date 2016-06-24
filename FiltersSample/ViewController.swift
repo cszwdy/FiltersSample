@@ -158,6 +158,7 @@ extension ViewController {
         super.setEditing(editing, animated: animated)
         navigationItem.rightBarButtonItem!.title = editing ? "Done" : "Edit"
         filterController.editModeChanged(editing)
+        
     }
 }
 

@@ -42,7 +42,6 @@ class FiltersViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 86, bottom: 0, right: 0)
         addButton.center.x = 84 / 2 + 2
     }
     
@@ -74,6 +73,8 @@ class FiltersViewController: UIViewController {
     
     func editModeChanged(_ editing: Bool) {
         setEditing(editing, animated: false)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: editing ? 86 : 0, bottom: 0, right: 0)
+        addButton.isHidden = !editing
         collectionView.reloadData()
     }
 }
