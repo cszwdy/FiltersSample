@@ -32,21 +32,6 @@ class PhotoViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(PhotoViewController.done))
         navigationItem.rightBarButtonItem?.isEnabled = false
     }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-//        if let vc = segue.destinationViewController as? PhotoDetailViewController {
-//            if let result = fetchResult, let cell = sender as? UICollectionViewCell, let i = collectionView.indexPath(for: cell)?.item {
-//                let asset = result[i]
-//                vc.manager = manager
-//                vc.asset = asset
-//            }
-//        }
-    }
     
     func done(sender: AnyObject) {
         

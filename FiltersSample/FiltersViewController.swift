@@ -37,21 +37,7 @@ class FiltersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let data = Filter.colorLUTData(byImage: (UIImage(named: "k2.jpeg")?.cgImage!)!, dimensiton: 64)!
-//        let item = FilterItem(name: "K2", data: data)
-//        filters = [item]
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -84,6 +70,11 @@ class FiltersViewController: UIViewController {
     
     @IBAction func add(_ sender: AnyObject) {
         addHandler?()
+    }
+    
+    func editModeChanged(_ editing: Bool) {
+        setEditing(editing, animated: false)
+        collectionView.reloadData()
     }
 }
 
@@ -126,7 +117,10 @@ extension FiltersViewController: UICollectionViewDataSource {
             let selectedv = UIView(frame: CGRect(origin: CGPoint.zero, size: cell.bounds.size))
             selectedv.backgroundColor = UIColor.yellow()
             cell.selectedBackgroundView = selectedv
-            
+        }
+        
+        if let delete = cell.viewWithTag(100) as? UIImageView {
+            delete.isHidden = !isEditing
         }
         
         return cell
@@ -137,22 +131,29 @@ extension FiltersViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if  let i = indexPath.item, image = image {
-            let filter = filters[i]
-            queue.async(execute: { 
-                let img = CIImage(cgImage: image.cgImage!)
-                let cgimg = Filter()
-                    .colorLUT(colorTableData: filter.data as Data, dimension: 64)
-                    .start(byImage: img)
-                    .tocgImage()
-                let filterImage = UIImage(cgImage: cgimg)
-                DispatchQueue.main.async(execute: { [weak self] in
-                    self?.didSelectedHandler?(filterImage)
+        if let i = indexPath.item where isEditing {
+            filters.remove(at: i)
+            collectionView.deleteItems(at: [indexPath])
+            
+        } else {
+            if  let i = indexPath.item, image = image {
+                let filter = filters[i]
+                queue.async(execute: {
+                    let img = CIImage(cgImage: image.cgImage!)
+                    let cgimg = Filter()
+                        .colorLUT(colorTableData: filter.data as Data, dimension: 64)
+                        .start(byImage: img)
+                        .tocgImage()
+                    let filterImage = UIImage(cgImage: cgimg)
+                    DispatchQueue.main.async(execute: { [weak self] in
+                        self?.didSelectedHandler?(filterImage)
+                        })
                 })
-            })
+            }
         }
-
-    }
+        }
+        
+        
     
 }
 

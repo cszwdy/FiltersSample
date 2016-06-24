@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11103.10"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,8 +27,31 @@
                                     <outletCollection property="gestureRecognizers" destination="YI2-Rs-mJm" appends="YES" id="koN-5C-cPz"/>
                                 </connections>
                             </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sqo-JZ-uyC">
+                                <frame key="frameInset" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem image="files-24px-outline_image" id="Jaa-aI-MQH">
+                                        <connections>
+                                            <action selector="changePhoto:" destination="BYZ-38-t0r" id="h1n-vC-ZIP"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="fSP-3f-cmk"/>
+                                    <barButtonItem image="arrows-24px-outline-2_square-download" id="ngA-Hd-abG">
+                                        <connections>
+                                            <action selector="saveFilters:" destination="BYZ-38-t0r" id="ch3-hx-eh3"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Vae-Vk-BTl"/>
+                                    <barButtonItem systemItem="action" id="Lwc-kD-zgS">
+                                        <connections>
+                                            <action selector="share:" destination="BYZ-38-t0r" id="fUU-1q-gZL"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wYC-Ys-WX2">
-                                <frame key="frameInset" height="88"/>
+                                <frame key="frameInset" height="88" maxY="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="j13-IA-kFE" kind="embed" id="LtN-d2-cW6"/>
@@ -37,14 +61,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="tWI-Vt-9KP">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="6v9-Sa-bq7">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="WiT-eq-JCE">
                             <connections>
-                                <action selector="changePhoto:" destination="BYZ-38-t0r" id="4Mw-CN-vGr"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="zBz-99-anc">
-                            <connections>
-                                <action selector="saveFilters:" destination="BYZ-38-t0r" id="cZK-cC-2yF"/>
+                                <action selector="editFilters:" destination="BYZ-38-t0r" id="tLT-pR-4FQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -96,15 +115,26 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="0.12549019610000001" green="0.47058823529999999" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsT-ye-lHa">
-                                                    <frame key="frameInset" minX="9.09%" width="81.82%" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ui-color-1_circle-remove" translatesAutoresizingMaskIntoConstraints="NO" id="z47-09-tXd">
+                                                    <frame key="frameInset" minY="5" width="20" height="20" maxX="5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="80" translatesAutoresizingMaskIntoConstraints="NO" id="UsT-ye-lHa">
+                                                    <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="3G9-YM-oab"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottomMargin" secondItem="UsT-ye-lHa" secondAttribute="bottom" constant="-4" id="IGa-TW-9dg"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="UsT-ye-lHa" secondAttribute="trailing" constant="-4" id="fFj-fy-17q"/>
+                                            <constraint firstItem="UsT-ye-lHa" firstAttribute="leading" secondItem="nzy-fU-QAG" secondAttribute="leadingMargin" constant="-4" id="vul-gM-Z4f"/>
+                                        </constraints>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -115,7 +145,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TrB-Dx-Fzc">
                                 <frame key="frameInset" minX="309" minY="21" width="46" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="ui-color-1_circle-add"/>
+                                <state key="normal" image="ui-color-2_square-add-08"/>
                                 <connections>
                                     <action selector="add:" destination="j13-IA-kFE" eventType="touchUpInside" id="UHD-Md-9LP"/>
                                 </connections>
@@ -206,6 +236,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ui-color-1_circle-add" width="46" height="46"/>
+        <image name="arrows-24px-outline-2_square-download" width="21" height="22"/>
+        <image name="files-24px-outline_image" width="19" height="23"/>
+        <image name="ui-color-1_circle-remove" width="20" height="20"/>
+        <image name="ui-color-2_square-add-08" width="30" height="30"/>
     </resources>
 </document>
