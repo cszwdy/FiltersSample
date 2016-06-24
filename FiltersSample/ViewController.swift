@@ -29,6 +29,11 @@ class ViewController: UIViewController {
         
         if let filters = NSKeyedUnarchiver.unarchiveObject(withFile: filterPath) as? [FilterItem] {
             filterController.filters = filters
+        } else {
+            
+            if let path = Bundle.main().pathForResource("filters", ofType: "cur"), let filters = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? [FilterItem] {
+                filterController.filters = filters
+            }
         }
         
         filterController.didSelectedHandler = { image in

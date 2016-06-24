@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C000CCB1D1D065300661D0F /* filters.cur in Resources */ = {isa = PBXBuildFile; fileRef = 2C000CCA1D1D065300661D0F /* filters.cur */; };
 		2C04FA521D1C0D0400F30734 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04FA511D1C0D0400F30734 /* PhotoViewController.swift */; };
 		2C63723E1D18D5A10060D86D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63723D1D18D5A10060D86D /* AppDelegate.swift */; };
 		2C6372401D18D5A10060D86D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63723F1D18D5A10060D86D /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C000CCA1D1D065300661D0F /* filters.cur */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = filters.cur; sourceTree = "<group>"; };
 		2C04FA511D1C0D0400F30734 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		2C63723A1D18D5A10060D86D /* FiltersSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FiltersSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C63723D1D18D5A10060D86D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 		2C63723C1D18D5A10060D86D /* FiltersSample */ = {
 			isa = PBXGroup;
 			children = (
+				2C000CCA1D1D065300661D0F /* filters.cur */,
 				2C63726B1D18D6BA0060D86D /* Filter.swift */,
 				2CE2BB561D1BC0EF009E4999 /* FIlterItem.swift */,
 				2C63723D1D18D5A10060D86D /* AppDelegate.swift */,
@@ -246,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C000CCB1D1D065300661D0F /* filters.cur in Resources */,
 				2C6372481D18D5A10060D86D /* LaunchScreen.storyboard in Resources */,
 				2C6372451D18D5A10060D86D /* Assets.xcassets in Resources */,
 				2C6372431D18D5A10060D86D /* Main.storyboard in Resources */,
